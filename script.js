@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   
-  // 1. ASSETS MANIFEST & DATA
+  // 1. ALL 33 PHOTO ASSETS WITH ROMANTIC ARABIC CAPTIONS
   const photoAssets = [
     { src: 'assets/PHOTO-2026-08-16-05-37-58.jpg', caption: 'ضحكتك دي هي نور حياتي ❤️' },
     { src: 'assets/PHOTO-2026-08-16-05-37-59.jpg', caption: 'أجمل ذكريات العمر سوا ✨' },
@@ -25,17 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
     { src: 'assets/7cf60b9b-10d0-46b8-a2dc-306a1cdfdb04.JPG', caption: 'شخصيتك الجذابة والفريدة ✨' },
     { src: 'assets/db4272b8-c95e-4f02-ae89-6c689642fc4e.JPG', caption: 'ذكريات لا تُمحى من البال 💖' },
     { src: 'assets/eb78f176-deb8-4a10-9985-254695234400.JPG', caption: 'نجمتي الساطعة دائماً 🌌' },
-    { src: 'assets/fd0c0d23-a12d-4910-ae56-cfd9c0c680cd.JPG', caption: 'أجمل هدية من ربنا ليا 🎁' }
-  ];
-
-  const videoAssets = [
-    { src: 'assets/VIDEO-2026-08-16-05-38-00.mp4', caption: 'فيديو من أجمل اللحظات 🎥' },
-    { src: 'assets/VIDEO-2026-08-16-05-38-01.mp4', caption: 'ضحك وفرحة سوا 🎉' },
-    { src: 'assets/VIDEO-2026-08-16-05-38-02.mp4', caption: 'ذكريات الفيديو الجميلة ✨' },
-    { src: 'assets/VIDEO-2026-08-16-05-38-04.mp4', caption: 'لحظة عفوية تثلج الصدر 💕' },
-    { src: 'assets/VIDEO-2026-08-16-05-38-05.mp4', caption: 'فيديو عيد الميلاد السعيد 🎂' },
-    { src: 'assets/VIDEO-2026-08-16-05-38-06.mp4', caption: 'مقطع خاص للذكرى ❤️' },
-    { src: 'assets/3cf720a4a5974b90af97fd64cc9e6c25.MP4', caption: 'ذكريات مميزة ومبهجة 🌟' }
+    { src: 'assets/fd0c0d23-a12d-4910-ae56-cfd9c0c680cd.JPG', caption: 'أجمل هدية من ربنا ليا 🎁' },
+    { src: 'assets/PHOTO-2026-08-16-05-37-58 (2).jpg', caption: 'دائماً في قلبي وبالي 💕' },
+    { src: 'assets/PHOTO-2026-08-16-05-37-58 (3).jpg', caption: 'أيامنا مع بعض أحلى الأيام 🌸' },
+    { src: 'assets/PHOTO-2026-08-16-05-37-59 (2).jpg', caption: 'كل سنة وأنتِ طيبة وبسعادة 🎉' },
+    { src: 'assets/PHOTO-2026-08-16-05-37-59 (3).jpg', caption: 'فرحة عمري وسري الجميل ✨' },
+    { src: 'assets/PHOTO-2026-08-16-05-37-59 (4).jpg', caption: 'ضحكة من القلب 💖' },
+    { src: 'assets/PHOTO-2026-08-16-05-37-59 (5).jpg', caption: 'أجمل بطلة في حياتي 👑' },
+    { src: 'assets/PHOTO-2026-08-16-05-38-00 (2).jpg', caption: 'نور عيوني وسعادتي ❤️' },
+    { src: 'assets/PHOTO-2026-08-16-05-38-00 (3).jpg', caption: 'الورد الجميل في البستان 🌹' },
+    { src: 'assets/PHOTO-2026-08-16-05-38-00 (4).jpg', caption: 'ذكريات رائعة تجمعنا 📸' },
+    { src: 'assets/PHOTO-2026-08-16-05-38-07 (2).jpg', caption: 'أنتِ عمري والجمال كله 💫' },
+    { src: 'assets/PHOTO-2026-08-16-05-38-07 (3).jpg', caption: 'ربنا يديمك في حياتي نعمة 🙏' },
+    { src: 'assets/PHOTO-2026-08-16-05-38-07 (4).jpg', caption: 'حب العمر كله ❤️' },
+    { src: 'assets/PHOTO-2026-08-16-05-38-07 (5).jpg', caption: 'سنة حلوة يا أجمل الناس 🎂' }
   ];
 
   const reasonsList = [
@@ -310,80 +313,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 7. MEMORIES GALLERY (POLAROID GRID)
+  // 7. MEMORIES GALLERY (POLAROID PHOTO GRID)
   const polaroidGrid = document.getElementById('polaroidGrid');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxVideo = document.getElementById('lightboxVideo');
   const lightboxCaption = document.getElementById('lightboxCaption');
   const closeLightbox = document.getElementById('closeLightbox');
-  const tabBtns = document.querySelectorAll('.tab-btn');
 
-  function renderGallery(filter = 'all') {
+  function renderGallery() {
     polaroidGrid.innerHTML = '';
-    
-    let items = [];
-    if (filter === 'all' || filter === 'photos') {
-      items = items.concat(photoAssets.map(p => ({ ...p, type: 'photo' })));
-    }
-    if (filter === 'all' || filter === 'videos') {
-      items = items.concat(videoAssets.map(v => ({ ...v, type: 'video' })));
-    }
 
-    items.forEach((item, index) => {
-      const rot = (index % 5 - 2) * 3; // Random tilt angle
+    photoAssets.forEach((item, index) => {
+      const rot = (index % 5 - 2) * 3; // Tilt angle
       const card = document.createElement('div');
       card.className = 'polaroid-card';
       card.style.setProperty('--rotation', rot);
 
-      let mediaHtml = '';
-      if (item.type === 'photo') {
-        mediaHtml = `<img src="${item.src}" alt="${item.caption}" loading="lazy">`;
-      } else {
-        mediaHtml = `
-          <video src="${item.src}" muted preload="metadata"></video>
-          <div class="video-play-badge"><i class="fa-solid fa-circle-play"></i></div>
-        `;
-      }
-
       card.innerHTML = `
-        <div class="polaroid-img-wrapper">${mediaHtml}</div>
+        <div class="polaroid-img-wrapper">
+          <img src="${item.src}" alt="${item.caption}" loading="lazy">
+        </div>
         <div class="polaroid-caption">${item.caption}</div>
       `;
 
       card.addEventListener('click', () => {
         lightbox.classList.remove('hidden');
         lightboxCaption.innerText = item.caption;
-        if (item.type === 'photo') {
-          lightboxVideo.classList.add('hidden');
-          lightboxVideo.pause();
-          lightboxImg.src = item.src;
-          lightboxImg.classList.remove('hidden');
-        } else {
-          lightboxImg.classList.add('hidden');
-          lightboxVideo.src = item.src;
-          lightboxVideo.classList.remove('hidden');
-          lightboxVideo.play();
-        }
+        lightboxImg.src = item.src;
       });
 
       polaroidGrid.appendChild(card);
     });
   }
 
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderGallery(btn.dataset.filter);
-    });
-  });
-
-  renderGallery('all');
+  renderGallery();
 
   closeLightbox.addEventListener('click', () => {
     lightbox.classList.add('hidden');
-    lightboxVideo.pause();
   });
 
   // 8. 10 REASONS WHY YOU ARE SPECIAL
