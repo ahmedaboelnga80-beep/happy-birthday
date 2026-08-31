@@ -1,0 +1,5 @@
+# Ignore temporary python scripts
+*.pyc
+__pycache__/
+manifest.json
+assets_config.json

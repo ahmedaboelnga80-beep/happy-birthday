@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عيد ميلاد سعيد يا أجمل سر في حياتي ❤️ | 17-10-2026</title>
+  <meta name="description" content="موقع خاص واحتفالية أسطورية بمناسبة عيد ميلاد أغلى شخص في حياتي - 17 أكتوبر 2026">
+  
+  <!-- Google Fonts for Arabic Typography & Modern Styling -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;900&family=Outfit:wght@400;600;800&family=Tajawal:wght@400;500;700;900&family=Reem+Kufi:wght@500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Particle & Stars Canvas -->
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- 1. WELCOME / LOCK SCREEN GATE -->
+  <div id="welcomeGate" class="welcome-gate">
+    <div class="welcome-card glass-panel">
+      <div class="heart-pulse-icon">
+        <i class="fa-solid fa-heart"></i>
+      </div>
+      <h1 class="welcome-title">رحلة مفاجآت عيد الميلاد 🎉</h1>
+      <p class="welcome-subtitle">تم تجهيز هذه الصفحة بحب كبير وتفاصيل خاصة بك فقط ✨</p>
+      
+      <div class="lock-date-badge">
+        <i class="fa-solid fa-calendar-day"></i>
+        <span>17 أكتوبر 2026</span>
+      </div>
+
+      <button id="enterBtn" class="primary-btn glow-btn">
+        <i class="fa-solid fa-key"></i>
+        <span>اضغطي هنا لفتح المفاجأة وتشغيل الموسيقى 🎵</span>
+      </button>
+      
+      <p class="small-hint">* يفضل استخدام السماعات لتجربة ساحرة *</p>
+    </div>
+  </div>
+
+  <!-- MAIN APPLICATION CONTENT (Hidden initially until Enter clicked) -->
+  <div id="appContainer" class="app-container hidden">
+
+    <!-- FLOATING MUSIC PLAYER BAR -->
+    <div id="musicControl" class="music-control glass-panel">
+      <div class="music-info">
+        <div class="disc-spin active" id="musicDisc">
+          <i class="fa-solid fa-music"></i>
+        </div>
+        <div class="track-text">
+          <span class="track-title">أحمد بتشان - يا روحي</span>
+          <span class="track-status" id="trackStatus">قيد التشغيل 🎶</span>
+        </div>
+      </div>
+      
+      <div class="music-visualizer" id="visualizer">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </div>
+
+      <div class="music-btns">
+        <button id="togglePlayBtn" class="icon-btn" title="تشغيل / إيقاف مؤقت">
+          <i class="fa-solid fa-pause" id="playIcon"></i>
+        </button>
+        <button id="muteBtn" class="icon-btn" title="كتم الصوت">
+          <i class="fa-solid fa-volume-high" id="muteIcon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- AUDIO ELEMENT -->
+    <audio id="bgAudio" src="assets/Albumaty.Com_ahmd_btshan_ya_rwhy.mp3" loop preload="auto"></audio>
+
+    <!-- HEADER & HERO SECTION -->
+    <header class="hero-section">
+      <div class="hero-badge">
+        <span class="sparkle">✨</span>
+        <span>ذكرى يوم ميلادك الفريد</span>
+        <span class="sparkle">✨</span>
+      </div>
+      
+      <h1 class="main-title">
+        كل عام وأنتِ <span class="gradient-text">أجمل حكايات عمري</span> ❤️
+      </h1>
+      
+      <p class="hero-quote">
+        "في يوم 17 أكتوبر، أشرقت الدنيا بنورك... وكل يوم معك هو عيد حقيقي لقلبي."
+      </p>
+
+      <!-- COUNTDOWN TIMER SECTION -->
+      <div class="countdown-wrapper glass-panel">
+        <h2 class="countdown-heading">
+          <i class="fa-solid fa-hourglass-half"></i>
+          العد التنازلي ليوم ميلادك (17 أكتوبر 2026)
+        </h2>
+        
+        <div class="countdown-grid" id="countdownGrid">
+          <div class="time-box">
+            <span class="time-num" id="days">00</span>
+            <span class="time-label">أيام</span>
+          </div>
+          <div class="time-sep">:</div>
+          <div class="time-box">
+            <span class="time-num" id="hours">00</span>
+            <span class="time-label">ساعات</span>
+          </div>
+          <div class="time-sep">:</div>
+          <div class="time-box">
+            <span class="time-num" id="minutes">00</span>
+            <span class="time-label">دقائق</span>
+          </div>
+          <div class="time-sep">:</div>
+          <div class="time-box">
+            <span class="time-num" id="seconds">00</span>
+            <span class="time-label">ثواني</span>
+          </div>
+        </div>
+
+        <div id="birthdayMessage" class="birthday-msg hidden">
+          🎂 🎉 اليوم هو عيد ميلادك السعيد! كل عام وأنتِ بقلبي وبألف خير! 🎉 🎂
+        </div>
+      </div>
+    </header>
+
+    <!-- INTERACTIVE BIRTHDAY CAKE & WISH CEREMONY -->
+    <section class="section cake-section">
+      <div class="section-header">
+        <span class="section-tag">طقوس الاحتفال</span>
+        <h2 class="section-title">كعكة عيد الميلاد وإطفاء الشموع 🎂</h2>
+        <p class="section-subtitle">انقري على الشمعة لإطفائها واكتشاف أمنيتك السحرية!</p>
+      </div>
+
+      <div class="cake-container glass-panel">
+        <div class="cake-wrapper" id="cakeWrapper">
+          <!-- Flames & Candles -->
+          <div class="candles-row">
+            <div class="candle" data-candle="1">
+              <div class="flame" id="flame1"></div>
+              <div class="wick"></div>
+              <div class="candle-body"></div>
+            </div>
+            <div class="candle" data-candle="2">
+              <div class="flame" id="flame2"></div>
+              <div class="wick"></div>
+              <div class="candle-body"></div>
+            </div>
+            <div class="candle" data-candle="3">
+              <div class="flame" id="flame3"></div>
+              <div class="wick"></div>
+              <div class="candle-body"></div>
+            </div>
+          </div>
+
+          <!-- Cake Layers -->
+          <div class="cake-layer layer-top">
+            <div class="icing"></div>
+            <div class="decor-cherries">
+              <span>🍒</span><span>🍒</span><span>🍒</span>
+            </div>
+          </div>
+          <div class="cake-layer layer-middle">
+            <div class="icing"></div>
+          </div>
+          <div class="cake-layer layer-bottom">
+            <div class="icing"></div>
+          </div>
+          <div class="cake-plate"></div>
+        </div>
+
+        <div class="cake-controls">
+          <button id="blowBtn" class="action-btn glow-btn">
+            <i class="fa-solid fa-wind"></i>
+            <span>انفخي الشموع وتمني أمنية ✨</span>
+          </button>
+          
+          <button id="makeWishBtn" class="action-btn secondary-btn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>أرسلي أمنية للسماء 🌌</span>
+          </button>
+        </div>
+
+        <div id="wishStatus" class="wish-status-text"></div>
+      </div>
+    </section>
+
+    <!-- MEMORIES PHOTO GALLERY -->
+    <section class="section gallery-section">
+      <div class="section-header">
+        <span class="section-tag">معرض الذكريات</span>
+        <h2 class="section-title">أجمل لحظاتنا وذكرياتنا المصورة 📸</h2>
+        <p class="section-subtitle">كل صورة هنا تحمل حكاية وابتسامة لا تُنسى</p>
+      </div>
+
+      <!-- FILTER TABS -->
+      <div class="gallery-tabs">
+        <button class="tab-btn active" data-filter="all">الكل 🌟</button>
+        <button class="tab-btn" data-filter="photos">الصور 🖼️</button>
+        <button class="tab-btn" data-filter="videos">الفيديوهات 🎥</button>
+      </div>
+
+      <!-- GALLERY GRID -->
+      <div class="polaroid-grid" id="polaroidGrid">
+        <!-- Dynamically filled by JS from assets -->
+      </div>
+    </section>
+
+    <!-- 10 REASONS WHY YOU ARE SPECIAL -->
+    <section class="section reasons-section">
+      <div class="section-header">
+        <span class="section-tag">من القلب</span>
+        <h2 class="section-title">١٠ أسباب تجعلكِ الأغلى والاستثنائية ❤️</h2>
+        <p class="section-subtitle">اضغطي على أي بطاقة لاكتشاف السبب الخفي</p>
+      </div>
+
+      <div class="reasons-grid" id="reasonsGrid">
+        <!-- 10 flip cards dynamically generated -->
+      </div>
+    </section>
+
+    <!-- INTERACTIVE GIFT BOX & VOUCHERS -->
+    <section class="section gift-section">
+      <div class="section-header">
+        <span class="section-tag">هدية خاصة</span>
+        <h2 class="section-title">صندوق المفاجآت والكوبونات الملكية 🎁</h2>
+        <p class="section-subtitle">اضغطي على الصندوق لفك الشريط واكتشاف هديتك</p>
+      </div>
+
+      <div class="gift-box-wrapper glass-panel">
+        <div class="gift-box" id="giftBox">
+          <div class="gift-lid" id="giftLid">
+            <div class="bow">
+              <div class="bow-left"></div>
+              <div class="bow-right"></div>
+            </div>
+          </div>
+          <div class="gift-body">
+            <div class="ribbon-v"></div>
+            <div class="ribbon-h"></div>
+            <div class="gift-text">افتحي المفاجأة 💖</div>
+          </div>
+        </div>
+
+        <div id="vouchersContainer" class="vouchers-container hidden">
+          <h3 class="vouchers-title">🎉 كروت هداياكِ الحصرية 🎉</h3>
+          <div class="vouchers-grid">
+            <div class="voucher-card">
+              <div class="voucher-icon"><i class="fa-solid fa-utensils"></i></div>
+              <h4>تذكرة عشاء رومانسي</h4>
+              <p>عشاء خاص في المكان الذي تختارينه وتحبينه جداً 🍽️✨</p>
+              <span class="voucher-code">CODE: LOVE-DINNER-2026</span>
+            </div>
+            <div class="voucher-card">
+              <div class="voucher-icon"><i class="fa-solid fa-plane-departure"></i></div>
+              <h4>تذكرة رحلة ومغامرة جديدة</h4>
+              <p>رحلة ممتعة لمكان يدخل البهجة على قلبك ✈️🌊</p>
+              <span class="voucher-code">CODE: LOVE-TRIP-2026</span>
+            </div>
+            <div class="voucher-card">
+              <div class="voucher-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
+              <h4>عناق دافئ فوري</h4>
+              <p>صالح للاستخدام في أي وقت وفي أي مكان بلا حدود 🫂❤️</p>
+              <span class="voucher-code">CODE: HUG-UNLIMITED</span>
+            </div>
+            <div class="voucher-card">
+              <div class="voucher-icon"><i class="fa-solid fa-crown"></i></div>
+              <h4>يوم أميرة ملكي</h4>
+              <p>يوم كامل لتلبية كل طلباتك ورغباتك بلا أي اعتراض 👑💖</p>
+              <span class="voucher-code">CODE: ROYAL-DAY-2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEARTFELT LOVE LETTER SECTION -->
+    <section class="section letter-section">
+      <div class="section-header">
+        <span class="section-tag">رسالة خاصة</span>
+        <h2 class="section-title">رسالة مكتوبة بكل حب 💌</h2>
+        <p class="section-subtitle">افتحي الظرف لقراءة الرسالة كاملة</p>
+      </div>
+
+      <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <div class="envelope-flap" id="envelopeFlap"></div>
+          <div class="envelope-seal" id="envelopeSeal"><i class="fa-solid fa-heart"></i></div>
+          <div class="letter-preview">اضغطي هنا لفتح الرسالة</div>
+        </div>
+
+        <div class="letter-paper glass-panel hidden" id="letterPaper">
+          <div class="letter-header-decor">✨ ❤️ ✨</div>
+          <div class="letter-content" id="typedLetter">
+            <!-- Typed via JS -->
+          </div>
+          <div class="letter-signature">
+            <span>دمتِ لي أجمل وأغلى الناس،</span>
+            <strong class="signature-name">بحبك جداً ❤️</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI LOVE QUIZ / MEMORIES GAME -->
+    <section class="section quiz-section">
+      <div class="section-header">
+        <span class="section-tag">لعبة ممتعة</span>
+        <h2 class="section-title">اختبار الذكريات والسعادة 🎯</h2>
+        <p class="section-subtitle">جاوبي على الأسئلة واكتشفي ميزتك الاستثنائية!</p>
+      </div>
+
+      <div class="quiz-box glass-panel" id="quizBox">
+        <!-- Dynamic quiz generated by JS -->
+      </div>
+    </section>
+
+    <!-- FOOTER & CONFETTI RE-TRIGGER -->
+    <footer class="footer-section">
+      <p class="footer-text">
+        تمت صناعة هذه الصفحة بكل الحب والاهتمام خصيصاً بمناسبة عيد ميلادك 🎈
+      </p>
+      
+      <button id="confettiBtn" class="action-btn glow-btn small-btn">
+        <i class="fa-solid fa-fireworks"></i>
+        <span>فجّري الألعاب النارية والسعادة 🎉</span>
+      </button>
+
+      <p class="copyright-text">17/10/2026 — Forever & Always ❤️</p>
+    </footer>
+
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR IMAGES / VIDEOS -->
+  <div id="lightbox" class="lightbox hidden">
+    <button id="closeLightbox" class="lightbox-close">&times;</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="ذكريات عيد الميلاد" class="hidden">
+      <video id="lightboxVideo" controls src="" class="hidden"></video>
+      <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <!-- WISH MODAL -->
+  <div id="wishModal" class="modal hidden">
+    <div class="modal-card glass-panel">
+      <button id="closeWishModal" class="modal-close">&times;</button>
+      <h3 class="modal-title">🌌 اكتب أمنيتك واطلقها في السماء</h3>
+      <textarea id="wishInput" placeholder="اكتب أمنية تبتغيها في سنتك الجديدة..." rows="4"></textarea>
+      <button id="sendWishBtn" class="action-btn glow-btn">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span>أرسل الأمنية للنجوم ✨</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript Script -->
+  <script src="script.js"></script>
+</body>
+</html>
